@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://minsung7633.github.io/minsung_pages/sitemap.xml

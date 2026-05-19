@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://minsung7633.github.io/minsung_pages/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://minsung7633.github.io/minsung_pages/assets/minsung-social-preview.jpg</image:loc>
+      <image:title>민성산업 유아용 놀이방매트 주문제작 예시</image:title>
+    </image:image>
+  </url>
+</urlset>
