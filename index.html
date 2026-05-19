@@ -79,25 +79,13 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 21px;
+      flex: 0 0 auto;
     }
 
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      color: var(--white);
-      background: linear-gradient(135deg, var(--teal), var(--ochre));
-      box-shadow: 0 10px 24px rgba(40, 86, 91, .24);
-    }
-
-    .brand-mark svg {
-      width: 22px;
-      height: 22px;
+    .brand-logo {
+      width: 190px;
+      max-width: 48vw;
+      height: auto;
     }
 
     .nav-links {
@@ -616,6 +604,7 @@
       color: var(--white);
       font-size: 20px;
       font-weight: 900;
+      overflow-wrap: anywhere;
     }
 
     .contact-actions {
@@ -762,14 +751,7 @@
     <header class="topbar">
       <div class="wrap nav" aria-label="주요 메뉴">
         <a class="brand" href="#top" aria-label="민성산업 홈">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M6 18.5V8.8c0-2.6 2-4.7 4.6-4.7h2.8c2.6 0 4.6 2.1 4.6 4.7v9.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M4.5 19.2c5.1-2 9.9-2 15 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M8.4 10.8h7.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <span>민성산업</span>
+          <img class="brand-logo" src="assets/minsung-logo.png" alt="민성산업 로고" width="916" height="302">
         </a>
         <nav class="nav-links" aria-label="페이지 이동">
           <a href="#about">회사소개</a>
@@ -1147,7 +1129,7 @@
           <div class="section-head">
             <p class="eyebrow">Contact</p>
             <h2>사업문의 안내</h2>
-            <p>유아용 놀이방매트 주문제작이나 판촉물·기념품 가방 제작이 필요하시면 제품 이미지, 규격, 예상 수량, 희망 납기를 함께 알려주세요.</p>
+            <p>유아용 놀이방매트 주문제작이나 판촉물·기념품 가방 제작이 필요하시면 제품 이미지, 규격, 예상 수량, 희망 납기를 전화 또는 이메일로 알려주세요.</p>
           </div>
           <div class="contact-box">
             <div class="contact-row">
@@ -1161,6 +1143,10 @@
             <div class="contact-row">
               <span>회사</span>
               <a href="tel:031-731-7633">031-731-7633</a>
+            </div>
+            <div class="contact-row">
+              <span>이메일</span>
+              <a href="mailto:minsungmat87@gmail.com">minsungmat87@gmail.com</a>
             </div>
             <div class="contact-row">
               <span>사무실</span>
@@ -1177,11 +1163,12 @@
                 </svg>
                 대표전화 문의
               </a>
-              <a class="button secondary" href="tel:010-7456-7633">
+              <a class="button secondary" href="mailto:minsungmat87@gmail.com">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M6 8.5h12M8 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4 6.8A2.8 2.8 0 0 1 6.8 4h10.4A2.8 2.8 0 0 1 20 6.8v10.4a2.8 2.8 0 0 1-2.8 2.8H6.8A2.8 2.8 0 0 1 4 17.2V6.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="m5.2 6.4 6.8 6 6.8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                문의전화 연결
+                이메일 문의
               </a>
             </div>
           </div>
