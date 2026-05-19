@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>민성산업 | 가방·매트 제조 납품</title>
+  <meta name="description" content="민성산업은 가방 제조 납품과 매트 제조 납품을 수행하는 제조 전문 업체입니다.">
+  <style>
+    :root {
+      --ink: #162421;
+      --muted: #5b6762;
+      --line: #d9ded7;
+      --paper: #fbfaf6;
+      --soft: #edf3ed;
+      --teal: #28565b;
+      --teal-2: #3d777d;
+      --moss: #8b9954;
+      --ochre: #b5793e;
+      --wood: #d8ba8c;
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(28, 45, 42, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(217, 222, 215, .86);
+      background: rgba(251, 250, 246, .94);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 21px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal), var(--ochre));
+      box-shadow: 0 10px 24px rgba(40, 86, 91, .24);
+    }
+
+    .brand-mark svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #34443f;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-2);
+    }
+
+    .hero {
+      min-height: 690px;
+      display: grid;
+      align-items: stretch;
+      position: relative;
+      background: #e8f0ec;
+    }
+
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(251, 250, 246, .96) 0%, rgba(251, 250, 246, .78) 36%, rgba(251, 250, 246, .2) 68%, rgba(251, 250, 246, .04) 100%);
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-items: center;
+      padding: 92px 0 74px;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: 58px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 34px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 21px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-bottom: 30px;
+      max-width: 560px;
+      color: #43524d;
+      font-size: 20px;
+      line-height: 1.72;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 34px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 8px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .button.primary {
+      color: var(--white);
+      background: var(--teal);
+      box-shadow: 0 14px 30px rgba(40, 86, 91, .24);
+    }
+
+    .button.secondary {
+      color: var(--teal);
+      border-color: rgba(40, 86, 91, .24);
+      background: rgba(255, 255, 255, .78);
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 660px;
+    }
+
+    .fact {
+      min-height: 106px;
+      border: 1px solid rgba(217, 222, 215, .78);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, .76);
+      box-shadow: 0 10px 24px rgba(32, 48, 45, .08);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--teal);
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 34px;
+    }
+
+    .section-head p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .about {
+      background: var(--paper);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .about-copy {
+      color: #3f4f4a;
+      font-size: 18px;
+    }
+
+    .about-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-row:last-child {
+      border-bottom: 0;
+    }
+
+    .info-row dt {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .info-row dd {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .services {
+      background: var(--soft);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      border: 1px solid rgba(217, 222, 215, .94);
+      border-radius: 8px;
+      background: var(--white);
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(30, 48, 45, .1);
+    }
+
+    .service-image {
+      height: 275px;
+      background: #e7eee9;
+      overflow: hidden;
+    }
+
+    .service-image svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 26px;
+    }
+
+    .service-body p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .checks {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: #334540;
+      font-weight: 700;
+    }
+
+    .checks li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+      margin-top: 2px;
+      color: var(--moss);
+    }
+
+    .records {
+      background: #fffdf8;
+    }
+
+    .record-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .record-card {
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px;
+      background: var(--white);
+      box-shadow: 0 14px 34px rgba(28, 45, 42, .08);
+    }
+
+    .record-label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .record-card strong {
+      display: block;
+      margin: 12px 0 20px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .record-note {
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    .process {
+      padding-top: 0;
+      background: #fffdf8;
+    }
+
+    .process-line {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      border-top: 4px solid var(--teal);
+      padding: 22px 18px 18px;
+      background: #f4f0e7;
+      min-height: 168px;
+    }
+
+    .step:nth-child(2) {
+      border-top-color: var(--ochre);
+    }
+
+    .step:nth-child(3) {
+      border-top-color: var(--moss);
+    }
+
+    .step:nth-child(4) {
+      border-top-color: var(--teal-2);
+    }
+
+    .step-num {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .step strong {
+      display: block;
+      margin: 12px 0 8px;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .contact {
+      color: var(--white);
+      background: #1c3b3f;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .contact h2 {
+      color: var(--white);
+    }
+
+    .contact .section-head {
+      margin-bottom: 0;
+    }
+
+    .contact .section-head p {
+      color: rgba(255, 255, 255, .76);
+    }
+
+    .contact-box {
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      padding: 26px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .contact-row:first-child {
+      padding-top: 0;
+    }
+
+    .contact-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .contact-row span {
+      color: rgba(255, 255, 255, .68);
+      font-weight: 800;
+    }
+
+    .contact-row a,
+    .contact-row strong {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .contact .button.primary {
+      color: #183437;
+      background: var(--wood);
+      box-shadow: none;
+    }
+
+    .contact .button.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, .26);
+      background: transparent;
+    }
+
+    footer {
+      padding: 26px 0;
+      color: #69736f;
+      background: #142b2e;
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255, 255, 255, .68);
+    }
+
+    @media (max-width: 860px) {
+      .wrap {
+        width: min(100% - 28px, 680px);
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 760px;
+      }
+
+      .hero-visual::after {
+        background: linear-gradient(180deg, rgba(251, 250, 246, .98) 0%, rgba(251, 250, 246, .82) 48%, rgba(251, 250, 246, .18) 100%);
+      }
+
+      .hero .wrap {
+        align-items: start;
+        padding: 58px 0 56px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .lead {
+        font-size: 18px;
+      }
+
+      .hero-facts,
+      .about-grid,
+      .service-grid,
+      .record-list,
+      .process-line,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .service-image {
+        height: 230px;
+      }
+
+      .record-card {
+        min-height: 148px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body {
+        font-size: 15px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .fact,
+      .service-body,
+      .record-card,
+      .contact-box {
+        padding: 20px;
+      }
+
+      .info-row,
+      .contact-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="wrap nav" aria-label="주요 메뉴">
+        <a class="brand" href="#top" aria-label="민성산업 홈">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 18.5V8.8c0-2.6 2-4.7 4.6-4.7h2.8c2.6 0 4.6 2.1 4.6 4.7v9.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M4.5 19.2c5.1-2 9.9-2 15 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M8.4 10.8h7.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>민성산업</span>
+        </a>
+        <nav class="nav-links" aria-label="페이지 이동">
+          <a href="#about">회사소개</a>
+          <a href="#services">사업영역</a>
+          <a href="#records">납품이력</a>
+          <a href="#contact">사업문의</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="민성산업 소개">
+        <div class="hero-visual" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1080" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#e9f1ee"/>
+                <stop offset=".52" stop-color="#d7e3dd"/>
+                <stop offset="1" stop-color="#c9d7d9"/>
+              </linearGradient>
+              <linearGradient id="floor" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#c38f5b"/>
+                <stop offset="1" stop-color="#8d6042"/>
+              </linearGradient>
+              <linearGradient id="table" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#efe5d2"/>
+                <stop offset="1" stop-color="#c6aa82"/>
+              </linearGradient>
+              <linearGradient id="bagMain" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#2b4b52"/>
+                <stop offset=".55" stop-color="#16383f"/>
+                <stop offset="1" stop-color="#0e252b"/>
+              </linearGradient>
+              <linearGradient id="matBlue" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#8eced2"/>
+                <stop offset="1" stop-color="#4a8e98"/>
+              </linearGradient>
+              <linearGradient id="matGreen" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#c4d76c"/>
+                <stop offset="1" stop-color="#89994e"/>
+              </linearGradient>
+              <linearGradient id="matOrange" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#d89357"/>
+                <stop offset="1" stop-color="#9f5d31"/>
+              </linearGradient>
+              <filter id="softShadow" x="-20%" y="-30%" width="140%" height="170%">
+                <feDropShadow dx="0" dy="28" stdDeviation="22" flood-color="#1b2828" flood-opacity=".23"/>
+              </filter>
+              <filter id="smallShadow" x="-20%" y="-30%" width="140%" height="160%">
+                <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#1b2828" flood-opacity=".18"/>
+              </filter>
+            </defs>
+            <rect width="1800" height="1080" fill="url(#wall)"/>
+            <path d="M0 777 C290 720 476 764 718 720 C1047 661 1291 606 1800 667 L1800 1080 L0 1080 Z" fill="url(#floor)"/>
+            <path d="M-40 806 C303 753 540 788 845 734 C1192 671 1448 654 1840 706 L1840 777 C1385 725 1127 750 802 805 C495 858 259 822 -40 878 Z" fill="#eadfcf" opacity=".72"/>
+            <g opacity=".26" stroke="#456667" stroke-width="2">
+              <path d="M108 135 H1644"/>
+              <path d="M108 245 H1644"/>
+              <path d="M108 355 H1644"/>
+              <path d="M108 465 H1644"/>
+              <path d="M108 575 H1644"/>
+            </g>
+            <g transform="translate(1020 210)" opacity=".52" filter="url(#smallShadow)">
+              <rect x="0" y="0" width="520" height="42" rx="4" fill="#6d7c75"/>
+              <rect x="26" y="42" width="20" height="214" fill="#53645f"/>
+              <rect x="475" y="42" width="20" height="214" fill="#53645f"/>
+              <rect x="18" y="118" width="490" height="32" fill="#7d8b83"/>
+              <rect x="18" y="212" width="490" height="32" fill="#7d8b83"/>
+              <rect x="74" y="58" width="92" height="48" rx="8" fill="#304a50"/>
+              <rect x="188" y="62" width="124" height="42" rx="8" fill="#b7834d"/>
+              <rect x="331" y="57" width="94" height="52" rx="8" fill="#547f83"/>
+              <rect x="83" y="164" width="126" height="36" rx="18" fill="#aab86d"/>
+              <rect x="236" y="162" width="118" height="36" rx="18" fill="#5b9aa2"/>
+              <rect x="114" y="256" width="240" height="38" rx="19" fill="#34565e"/>
+            </g>
+            <g transform="translate(152 520)" filter="url(#softShadow)">
+              <path d="M0 106 C124 62 257 40 408 53 C542 64 676 103 800 157 L758 312 C591 260 442 239 283 252 C185 260 96 281 8 319 Z" fill="url(#table)"/>
+              <path d="M9 319 C189 277 337 273 507 294 C611 307 694 327 758 354 L758 401 C612 347 457 325 298 331 C184 336 89 354 9 385 Z" fill="#a37b57"/>
+            </g>
+            <g transform="translate(380 324)" filter="url(#softShadow)">
+              <path d="M233 308 C188 307 140 309 99 314 C74 318 54 306 49 280 L24 144 C18 115 37 89 66 86 L365 52 C394 49 421 68 425 98 L443 246 C447 276 425 302 395 303 C341 304 289 309 233 308 Z" fill="url(#bagMain)"/>
+              <path d="M100 89 C120 10 332 -13 365 59" fill="none" stroke="#173239" stroke-width="25" stroke-linecap="round"/>
+              <path d="M103 105 C128 49 319 31 350 75" fill="none" stroke="#e7dac1" stroke-width="12" stroke-linecap="round"/>
+              <path d="M82 134 C205 106 312 96 397 103" fill="none" stroke="#5d8385" stroke-width="9" opacity=".75"/>
+              <path d="M82 182 C203 154 313 144 408 151" fill="none" stroke="#486b6e" stroke-width="7" opacity=".6"/>
+              <path d="M292 84 L323 282" stroke="#d09352" stroke-width="12" stroke-linecap="round"/>
+              <rect x="116" y="210" width="137" height="57" rx="12" fill="#e7dac1" opacity=".9"/>
+              <path d="M138 233 H232" stroke="#25454b" stroke-width="7" stroke-linecap="round"/>
+              <path d="M138 250 H209" stroke="#25454b" stroke-width="7" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(912 482)" filter="url(#softShadow)">
+              <ellipse cx="318" cy="155" rx="272" ry="74" fill="#28464d" opacity=".19"/>
+              <g transform="translate(0 58) rotate(-5 308 114)">
+                <rect x="44" y="26" width="558" height="102" rx="51" fill="url(#matBlue)"/>
+                <ellipse cx="92" cy="77" rx="51" ry="51" fill="#c8eff1"/>
+                <ellipse cx="92" cy="77" rx="31" ry="31" fill="#73b9c0"/>
+                <path d="M158 42 H554" stroke="#d4f5f6" stroke-width="11" opacity=".63" stroke-linecap="round"/>
+                <path d="M165 86 H497" stroke="#376d73" stroke-width="9" opacity=".39" stroke-linecap="round"/>
+              </g>
+              <g transform="translate(28 143) rotate(3 308 114)">
+                <rect x="38" y="22" width="557" height="106" rx="53" fill="url(#matGreen)"/>
+                <ellipse cx="91" cy="75" rx="53" ry="53" fill="#eef5c6"/>
+                <ellipse cx="91" cy="75" rx="32" ry="32" fill="#95a958"/>
+                <path d="M165 43 H534" stroke="#f5f8d8" stroke-width="10" opacity=".64" stroke-linecap="round"/>
+                <path d="M166 88 H480" stroke="#61733a" stroke-width="9" opacity=".34" stroke-linecap="round"/>
+              </g>
+              <g transform="translate(4 231) rotate(-2 308 114)">
+                <rect x="48" y="18" width="540" height="108" rx="54" fill="url(#matOrange)"/>
+                <ellipse cx="103" cy="72" rx="54" ry="54" fill="#f6d1a9"/>
+                <ellipse cx="103" cy="72" rx="33" ry="33" fill="#af6533"/>
+                <path d="M179 43 H522" stroke="#f8d1aa" stroke-width="10" opacity=".6" stroke-linecap="round"/>
+                <path d="M183 88 H453" stroke="#74411f" stroke-width="9" opacity=".31" stroke-linecap="round"/>
+              </g>
+            </g>
+            <g transform="translate(1018 300)" filter="url(#smallShadow)">
+              <path d="M18 94 C78 75 160 62 244 61 C337 60 408 75 474 101 L450 180 C319 139 181 139 42 184 Z" fill="#d8c8a8"/>
+              <rect x="26" y="175" width="426" height="24" rx="12" fill="#8a664b"/>
+              <rect x="127" y="9" width="246" height="37" rx="18" fill="#455e62"/>
+              <path d="M247 43 L247 164" stroke="#2f494f" stroke-width="28" stroke-linecap="round"/>
+              <path d="M247 75 C203 74 166 83 137 102 C111 119 96 143 90 173" fill="none" stroke="#2f494f" stroke-width="22" stroke-linecap="round"/>
+              <circle cx="247" cy="62" r="20" fill="#d09352"/>
+            </g>
+          </svg>
+        </div>
+        <div class="wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">가방·매트 제조 납품 전문</p>
+            <h1>민성산업</h1>
+            <p class="lead">브랜드 납품 경험을 바탕으로 가방과 매트 제품을 안정적으로 제조·납품하는 제조 파트너입니다.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="tel:010-7456-7633">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7.3 4.7 9.6 7c.6.6.7 1.5.2 2.2l-.9 1.3c.9 1.8 2.3 3.3 4.2 4.2l1.3-.9c.7-.5 1.6-.4 2.2.2l2.3 2.3c.6.6.7 1.6.1 2.3-.8 1-2 1.6-3.3 1.5C9.2 19.8 4.2 14.8 3.9 8.3c-.1-1.3.5-2.5 1.5-3.3.7-.6 1.7-.5 2.3.1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                대표 문의
+              </a>
+              <a class="button secondary" href="#contact">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                사업문의 안내
+              </a>
+            </div>
+            <div class="hero-facts" aria-label="주요 정보">
+              <div class="fact">
+                <strong>Bag</strong>
+                <span>가방 제조 납품</span>
+              </div>
+              <div class="fact">
+                <strong>Mat</strong>
+                <span>매트 제조 납품</span>
+              </div>
+              <div class="fact">
+                <strong>B2B</strong>
+                <span>브랜드 납품 경험</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="wrap about-grid">
+          <div>
+            <div class="section-head">
+              <p class="eyebrow">Company</p>
+              <h2>제조 현장을 이해하는 납품 파트너</h2>
+            </div>
+            <div class="about-copy">
+              <p>민성산업은 핸드백, 가방 및 기타 보호용 케이스 제조업을 기반으로 가방류 제품과 매트류 제품의 제조 납품을 수행합니다.</p>
+              <p>제품 특성, 납기, 수량, 포장 방식 등 발주처의 조건을 함께 검토하고, 반복 납품에 필요한 일정 관리와 품질 대응을 중요하게 생각합니다.</p>
+            </div>
+          </div>
+          <dl class="info-panel">
+            <div class="info-row">
+              <dt>회사명</dt>
+              <dd>민성산업</dd>
+            </div>
+            <div class="info-row">
+              <dt>대표자</dt>
+              <dd>박수근</dd>
+            </div>
+            <div class="info-row">
+              <dt>사업자번호</dt>
+              <dd>129-08-96521</dd>
+            </div>
+            <div class="info-row">
+              <dt>업종</dt>
+              <dd>핸드백, 가방 및 기타 보호용 케이스 제조업</dd>
+            </div>
+            <div class="info-row">
+              <dt>주소</dt>
+              <dd>경기 성남시 중원구 산성대로382번길 18</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="services" id="services">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Business</p>
+            <h2>주요 사업영역</h2>
+            <p>브랜드와 유통사의 요구에 맞춰 소재, 규격, 마감, 포장 조건을 확인하고 납품 품질을 안정적으로 맞춥니다.</p>
+          </div>
+          <div class="service-grid">
+            <article class="service-card">
+              <div class="service-image" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice">
+                  <defs>
+                    <linearGradient id="bagBg" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#f4efe6"/>
+                      <stop offset="1" stop-color="#dfe9e4"/>
+                    </linearGradient>
+                    <linearGradient id="bagBody" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#2d5660"/>
+                      <stop offset="1" stop-color="#112c32"/>
+                    </linearGradient>
+                    <filter id="bagShadow" x="-20%" y="-30%" width="140%" height="170%">
+                      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#213131" flood-opacity=".22"/>
+                    </filter>
+                  </defs>
+                  <rect width="900" height="620" fill="url(#bagBg)"/>
+                  <path d="M0 488 C168 450 316 456 465 482 C622 509 762 494 900 452 L900 620 L0 620 Z" fill="#c9945d"/>
+                  <g opacity=".3" stroke="#557070" stroke-width="2">
+                    <path d="M72 98 H828"/>
+                    <path d="M72 182 H828"/>
+                    <path d="M72 266 H828"/>
+                  </g>
+                  <g transform="translate(236 132)" filter="url(#bagShadow)">
+                    <path d="M210 326 C155 326 103 331 58 342 C31 349 7 331 3 303 L-18 160 C-22 129 -1 101 31 97 L393 54 C426 50 456 73 459 106 L474 265 C477 296 453 322 421 321 C350 319 280 326 210 326 Z" fill="url(#bagBody)"/>
+                    <path d="M67 100 C92 6 352 -18 394 56" fill="none" stroke="#142e34" stroke-width="30" stroke-linecap="round"/>
+                    <path d="M84 111 C125 57 321 43 363 75" fill="none" stroke="#f2e4c9" stroke-width="13" stroke-linecap="round"/>
+                    <path d="M32 152 C164 120 308 106 430 114" fill="none" stroke="#87a9a9" stroke-width="10" opacity=".72"/>
+                    <path d="M39 204 C181 170 314 159 439 169" fill="none" stroke="#5f8688" stroke-width="8" opacity=".68"/>
+                    <path d="M321 90 L350 299" stroke="#d49250" stroke-width="13" stroke-linecap="round"/>
+                    <rect x="103" y="230" width="153" height="66" rx="12" fill="#eadcc5" opacity=".94"/>
+                    <path d="M128 254 H229" stroke="#25454b" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M128 274 H206" stroke="#25454b" stroke-width="8" stroke-linecap="round"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="service-body">
+                <h3>가방 제조 납품</h3>
+                <p>스포츠·브랜드 가방류의 제조 납품 경험을 바탕으로 제품 규격과 마감 품질을 맞춥니다.</p>
+                <ul class="checks">
+                  <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    샘플 기준 확인 및 생산 사양 검토
+                  </li>
+                  <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    소재, 봉제, 부자재, 포장 조건 대응
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-image" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice">
+                  <defs>
+                    <linearGradient id="matBg" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#edf4f0"/>
+                      <stop offset=".6" stop-color="#e6d8c7"/>
+                      <stop offset="1" stop-color="#c7d9db"/>
+                    </linearGradient>
+                    <linearGradient id="matB" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#8bd2d4"/>
+                      <stop offset="1" stop-color="#478c98"/>
+                    </linearGradient>
+                    <linearGradient id="matG" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#d3df76"/>
+                      <stop offset="1" stop-color="#87954e"/>
+                    </linearGradient>
+                    <linearGradient id="matR" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0" stop-color="#d79659"/>
+                      <stop offset="1" stop-color="#9f5b32"/>
+                    </linearGradient>
+                    <filter id="matShadow" x="-20%" y="-30%" width="140%" height="170%">
+                      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#203030" flood-opacity=".22"/>
+                    </filter>
+                  </defs>
+                  <rect width="900" height="620" fill="url(#matBg)"/>
+                  <path d="M0 480 C147 430 308 444 462 481 C620 519 758 498 900 445 L900 620 L0 620 Z" fill="#b98962"/>
+                  <g transform="translate(126 120)" filter="url(#matShadow)">
+                    <ellipse cx="346" cy="297" rx="330" ry="72" fill="#23444c" opacity=".16"/>
+                    <g transform="translate(5 0) rotate(-4 322 90)">
+                      <rect x="40" y="38" width="636" height="120" rx="60" fill="url(#matB)"/>
+                      <ellipse cx="100" cy="98" rx="60" ry="60" fill="#d2f3f3"/>
+                      <ellipse cx="100" cy="98" rx="36" ry="36" fill="#6ab5bd"/>
+                      <path d="M187 69 H611" stroke="#def7f7" stroke-width="12" opacity=".65" stroke-linecap="round"/>
+                      <path d="M191 121 H548" stroke="#376d73" stroke-width="10" opacity=".4" stroke-linecap="round"/>
+                    </g>
+                    <g transform="translate(32 107) rotate(3 322 90)">
+                      <rect x="28" y="42" width="646" height="122" rx="61" fill="url(#matG)"/>
+                      <ellipse cx="89" cy="103" rx="61" ry="61" fill="#f2f6cc"/>
+                      <ellipse cx="89" cy="103" rx="37" ry="37" fill="#96a956"/>
+                      <path d="M187 76 H601" stroke="#f5f9d7" stroke-width="12" opacity=".72" stroke-linecap="round"/>
+                      <path d="M191 129 H530" stroke="#65723d" stroke-width="10" opacity=".38" stroke-linecap="round"/>
+                    </g>
+                    <g transform="translate(0 220) rotate(-2 322 90)">
+                      <rect x="47" y="35" width="618" height="122" rx="61" fill="url(#matR)"/>
+                      <ellipse cx="108" cy="96" rx="61" ry="61" fill="#f5d2ad"/>
+                      <ellipse cx="108" cy="96" rx="37" ry="37" fill="#b56635"/>
+                      <path d="M204 67 H592" stroke="#f8d5b0" stroke-width="12" opacity=".66" stroke-linecap="round"/>
+                      <path d="M209 119 H510" stroke="#74411f" stroke-width="10" opacity=".36" stroke-linecap="round"/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div class="service-body">
+                <h3>매트 제조 납품</h3>
+                <p>생활·유아용 매트 제품 납품 경험을 바탕으로 규격, 쿠션감, 마감, 패키징 조건을 함께 검토합니다.</p>
+                <ul class="checks">
+                  <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    사이즈와 소재 조건에 맞춘 생산 협의
+                  </li>
+                  <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    출고 전 포장 및 납품 일정 관리
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="records" id="records">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Supply Records</p>
+            <h2>주요 납품 이력</h2>
+            <p>다양한 제품군의 납품 경험을 바탕으로 발주처가 요구하는 기준과 일정에 맞춰 대응합니다.</p>
+          </div>
+          <div class="record-list">
+            <article class="record-card">
+              <span class="record-label">가방 납품</span>
+              <strong>나이키 가방</strong>
+              <span class="record-note">스포츠 브랜드 제품군</span>
+            </article>
+            <article class="record-card">
+              <span class="record-label">가방 납품</span>
+              <strong>아식스 가방</strong>
+              <span class="record-note">브랜드 가방 제품군</span>
+            </article>
+            <article class="record-card">
+              <span class="record-label">매트 납품</span>
+              <strong>꿈비 매트</strong>
+              <span class="record-note">생활 매트 제품군</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="process" aria-label="문의 진행 방식">
+        <div class="wrap process-line">
+          <article class="step">
+            <span class="step-num">01</span>
+            <strong>제품 조건 확인</strong>
+            <p>제품 종류, 수량, 납기, 샘플 유무를 먼저 확인합니다.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">02</span>
+            <strong>사양 협의</strong>
+            <p>소재, 규격, 마감, 포장 방식 등 생산 조건을 조율합니다.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">03</span>
+            <strong>견적 검토</strong>
+            <p>생산 조건과 납품 범위를 기준으로 견적을 협의합니다.</p>
+          </article>
+          <article class="step">
+            <span class="step-num">04</span>
+            <strong>제조 납품</strong>
+            <p>확정된 일정에 맞춰 생산과 출고를 진행합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="wrap contact-grid">
+          <div class="section-head">
+            <p class="eyebrow">Contact</p>
+            <h2>사업문의 안내</h2>
+            <p>가방 또는 매트 제조 납품이 필요하시면 제품 이미지, 규격, 예상 수량, 희망 납기를 함께 알려주세요. 확인 후 상담을 도와드립니다.</p>
+          </div>
+          <div class="contact-box">
+            <div class="contact-row">
+              <span>대표</span>
+              <a href="tel:010-7456-7633">010-7456-7633</a>
+            </div>
+            <div class="contact-row">
+              <span>회사</span>
+              <a href="tel:031-731-7633">031-731-7633</a>
+            </div>
+            <div class="contact-row">
+              <span>주소</span>
+              <strong>경기 성남시 중원구 산성대로382번길 18</strong>
+            </div>
+            <div class="contact-actions">
+              <a class="button primary" href="tel:010-7456-7633">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7.3 4.7 9.6 7c.6.6.7 1.5.2 2.2l-.9 1.3c.9 1.8 2.3 3.3 4.2 4.2l1.3-.9c.7-.5 1.6-.4 2.2.2l2.3 2.3c.6.6.7 1.6.1 2.3-.8 1-2 1.6-3.3 1.5C9.2 19.8 4.2 14.8 3.9 8.3c-.1-1.3.5-2.5 1.5-3.3.7-.6 1.7-.5 2.3.1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                대표 번호로 문의
+              </a>
+              <a class="button secondary" href="tel:031-731-7633">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 8.5h12M8 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                회사 번호로 문의
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <span>© 민성산업. All rights reserved.</span>
+        <span>가방 제조 납품 · 매트 제조 납품</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
