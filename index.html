@@ -335,6 +335,47 @@
       font-weight: 700;
     }
 
+    .factory {
+      background: #fffdf8;
+    }
+
+    .factory-gallery {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .factory-photo {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 16px 40px rgba(28, 45, 42, .09);
+    }
+
+    .factory-photo-large {
+      grid-row: span 2;
+    }
+
+    .factory-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      object-fit: cover;
+    }
+
+    .factory-photo-large img {
+      min-height: 540px;
+    }
+
+    .factory-photo figcaption {
+      padding: 14px 16px 16px;
+      color: #40514c;
+      font-weight: 800;
+    }
+
     .services {
       background: var(--soft);
     }
@@ -652,6 +693,7 @@
 
       .hero-facts,
       .about-grid,
+      .factory-gallery,
       .service-grid,
       .example-gallery,
       .record-list,
@@ -670,6 +712,15 @@
 
       .record-card {
         min-height: 148px;
+      }
+
+      .factory-photo-large {
+        grid-row: auto;
+      }
+
+      .factory-photo-large img,
+      .factory-photo img {
+        min-height: 260px;
       }
 
       .footer-inner {
@@ -691,6 +742,7 @@
       }
 
       .fact,
+      .factory-photo figcaption,
       .service-body,
       .record-card,
       .contact-box {
@@ -721,6 +773,7 @@
         </a>
         <nav class="nav-links" aria-label="페이지 이동">
           <a href="#about">회사소개</a>
+          <a href="#factory">공장안내</a>
           <a href="#services">사업영역</a>
           <a href="#records">제작품목</a>
           <a href="#contact">사업문의</a>
@@ -917,6 +970,30 @@
               <dd>경기도 광주시 곤지암읍 부항리 18-7</dd>
             </div>
           </dl>
+        </div>
+      </section>
+
+      <section class="factory" id="factory">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Factory</p>
+            <h2>공장 전경과 작업 공간</h2>
+            <p>경기도 광주시 곤지암읍 공장에서 매트 제작에 필요한 자재 보관, 포장 준비, 출고 대기까지 안정적으로 관리합니다.</p>
+          </div>
+          <div class="factory-gallery" aria-label="민성산업 공장 사진">
+            <figure class="factory-photo factory-photo-large">
+              <img src="assets/factory-exterior.jpg" alt="민성산업 공장 외부 전경" loading="lazy" decoding="async">
+              <figcaption>광주 곤지암 공장 외부</figcaption>
+            </figure>
+            <figure class="factory-photo">
+              <img src="assets/factory-workspace.jpg" alt="매트 자재를 보관하는 공장 내부 작업 공간" loading="lazy" decoding="async">
+              <figcaption>자재 보관 및 작업 공간</figcaption>
+            </figure>
+            <figure class="factory-photo">
+              <img src="assets/factory-packaging.jpg" alt="제품 포장과 출고 준비가 이루어지는 공장 내부 공간" loading="lazy" decoding="async">
+              <figcaption>포장 준비 및 출고 대기 공간</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
