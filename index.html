@@ -209,12 +209,14 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      background-image: url("assets/main-landscape.png");
+      background-position: center bottom;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     .hero-visual svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      display: none;
     }
 
     .hero-visual::after {
@@ -747,6 +749,11 @@
 
       .hero {
         min-height: 760px;
+      }
+
+      .hero-visual {
+        background-image: url("assets/main-mobile.png");
+        background-position: 45% center;
       }
 
       .hero-visual::after {
