@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>황금력 테스트</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7f8;
+        --panel: #ffffff;
+        --ink: #1f272a;
+        --muted: #667174;
+        --line: #d9e0e2;
+        --teal: #0f766e;
+        --teal-soft: #d9f3ee;
+        --coral: #e0523f;
+        --coral-soft: #fde4df;
+        --gold: #f4bc2e;
+        --green: #138a53;
+        --shadow: 0 18px 50px rgba(21, 31, 36, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 32%),
+          linear-gradient(225deg, rgba(244, 188, 46, 0.16), transparent 30%),
+          var(--bg);
+        color: var(--ink);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+      }
+
+      .app {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .title-block h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 5vw, 4.2rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .title-block p {
+        max-width: 640px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .ghost-button,
+      .primary-button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 0 14px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease,
+          background 160ms ease;
+      }
+
+      .ghost-button {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--ink);
+      }
+
+      .primary-button {
+        background: var(--teal);
+        color: #ffffff;
+        box-shadow: 0 10px 18px rgba(15, 118, 110, 0.18);
+      }
+
+      .ghost-button:hover,
+      .primary-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .quiz-panel,
+      .score-panel,
+      .result-panel,
+      .empty-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+      }
+
+      .quiz-panel {
+        min-height: 620px;
+        padding: 28px;
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 22px;
+      }
+
+      .badge {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0 12px;
+        background: var(--teal-soft);
+        color: #064f49;
+        font-weight: 700;
+        font-size: 0.92rem;
+      }
+
+      .progress-track {
+        width: min(260px, 42vw);
+        height: 10px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e8eef0;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--gold), var(--teal));
+        transition: width 220ms ease;
+      }
+
+      .question {
+        min-height: 116px;
+        margin: 0 0 22px;
+        font-size: clamp(1.55rem, 3.4vw, 2.4rem);
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .choices {
+        display: grid;
+        gap: 12px;
+      }
+
+      .choice-button {
+        display: grid;
+        grid-template-columns: 34px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 62px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px 14px;
+        background: #ffffff;
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        transition:
+          border-color 160ms ease,
+          transform 160ms ease,
+          background 160ms ease;
+      }
+
+      .choice-button:hover:not(:disabled) {
+        border-color: var(--teal);
+        transform: translateY(-1px);
+      }
+
+      .choice-button:disabled {
+        cursor: default;
+      }
+
+      .choice-mark {
+        display: inline-grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 8px;
+        background: #edf2f3;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .choice-text {
+        overflow-wrap: anywhere;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .choice-state {
+        min-width: 52px;
+        color: var(--muted);
+        text-align: right;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .choice-button.correct {
+        border-color: rgba(19, 138, 83, 0.65);
+        background: #edf9f2;
+      }
+
+      .choice-button.correct .choice-mark {
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .choice-button.wrong {
+        border-color: rgba(224, 82, 63, 0.6);
+        background: var(--coral-soft);
+      }
+
+      .choice-button.wrong .choice-mark {
+        background: var(--coral);
+        color: #ffffff;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 20px;
+        border-left: 4px solid var(--teal);
+        border-radius: 8px;
+        background: #f7fbfb;
+        padding: 16px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .feedback p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .quiz-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .score-panel {
+        padding: 20px;
+        position: sticky;
+        top: 20px;
+      }
+
+      .score-panel h2 {
+        margin: 0 0 16px;
+        font-size: 1rem;
+      }
+
+      .score-number {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .score-number strong {
+        font-size: 3.2rem;
+        line-height: 1;
+      }
+
+      .score-number span {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .metric-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .metric-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+        color: var(--muted);
+      }
+
+      .metric-list b {
+        color: var(--ink);
+      }
+
+      .review-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .review-item {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        background: #ffffff;
+      }
+
+      .review-dot {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 999px;
+        background: #eef3f4;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .review-item.ok .review-dot {
+        background: #dff4e9;
+        color: var(--green);
+      }
+
+      .review-item.no .review-dot {
+        background: var(--coral-soft);
+        color: var(--coral);
+      }
+
+      .review-item p {
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      .review-item small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      .empty-panel {
+        padding: 28px;
+      }
+
+      .empty-panel h2 {
+        margin: 0 0 10px;
+      }
+
+      .empty-panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @media (max-width: 860px) {
+        .app {
+          width: min(100% - 22px, 680px);
+          padding: 22px 0;
+        }
+
+        .topbar,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          justify-content: flex-start;
+        }
+
+        .quiz-panel {
+          min-height: auto;
+          padding: 20px;
+        }
+
+        .score-panel {
+          position: static;
+        }
+
+        .status-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .progress-track {
+          width: 100%;
+        }
+
+        .question {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .choice-button {
+          grid-template-columns: 30px 1fr;
+        }
+
+        .choice-state {
+          grid-column: 2;
+          min-width: 0;
+          text-align: left;
+        }
+
+        .ghost-button,
+        .primary-button {
+          width: 100%;
+        }
+
+        .quiz-actions {
+          flex-direction: column-reverse;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="title-block">
+          <h1>황금력 테스트</h1>
+          <p>
+            황금파 채팅 기록으로 만든 문제를 하나씩 풀고, 정답 근거와 해설을
+            확인한 뒤 마지막에 총점을 볼 수 있습니다.
+          </p>
+        </div>
+        <div class="controls">
+          <button class="ghost-button" id="shuffleButton" type="button" title="문제 순서를 섞습니다">
+            <span aria-hidden="true">↕</span>
+            순서 섞기
+          </button>
+          <button class="ghost-button" id="restartButton" type="button" title="처음부터 다시 풉니다">
+            <span aria-hidden="true">↺</span>
+            다시 풀기
+          </button>
+        </div>
+      </header>
+
+      <section class="layout">
+        <section class="quiz-panel" id="quizPanel" aria-live="polite">
+          <div class="empty-panel" id="loadingPanel">
+            <h2>황금력을 준비하는 중입니다</h2>
+            <p>문제를 정리하고 있습니다.</p>
+          </div>
+
+          <div class="hidden" id="quizContent">
+            <div class="status-row">
+              <span class="badge" id="questionBadge">문제 1 / 10</span>
+              <div class="progress-track" aria-label="진행률">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+
+            <h2 class="question" id="questionText"></h2>
+            <div class="choices" id="choices"></div>
+
+            <article class="feedback" id="feedback">
+              <strong id="feedbackTitle"></strong>
+              <p id="feedbackEvidence"></p>
+              <p id="feedbackExplanation"></p>
+            </article>
+
+            <div class="quiz-actions">
+              <button class="primary-button" id="nextButton" type="button" disabled>
+                다음
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="empty-panel hidden" id="errorPanel">
+            <h2>문제를 불러오지 못했습니다</h2>
+            <p id="errorMessage"></p>
+          </div>
+        </section>
+
+        <aside class="score-panel">
+          <h2>현재 점수</h2>
+          <div class="score-number">
+            <strong id="scoreValue">0</strong>
+            <span id="scoreTotal">/ 0</span>
+          </div>
+          <ul class="metric-list">
+            <li><span>푼 문제</span><b id="answeredCount">0</b></li>
+            <li><span>정답</span><b id="correctCount">0</b></li>
+            <li><span>정답률</span><b id="accuracyValue">0%</b></li>
+          </ul>
+          <div class="review-list" id="reviewList"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const choiceMarks = ["A", "B", "C", "D", "E", "F"];
+      const quizData = [
+        {
+          id: 1,
+          question: "채팅방에서 가장 말을 많이 한 사람은?",
+          choices: ["문유성", "괴물김기웅동생", "박종호군", "권치 권치원군"],
+          answer: "괴물김기웅동생",
+          evidence:
+            "사용자별 메시지 수 집계: 괴물김기웅동생 4,718개, 문유성 2,027개, 권치 권치원군 1,548개, 박종호군 1,444개.",
+          explanation: "전체 채팅 기록에서 User별 메시지 개수를 세면 괴물김기웅동생이 가장 많다.",
+        },
+        {
+          id: 2,
+          question: "채팅방에서 두 번째로 말을 많이 한 사람은?",
+          choices: ["문유성", "박종호군", "권치 권치원군", "렙퍼박지영군"],
+          answer: "문유성",
+          evidence:
+            "사용자별 메시지 수 집계 2위: 문유성 2,027개. 3위 권치 권치원군 1,548개, 4위 박종호군 1,444개.",
+          explanation: "가장 많은 사람은 괴물김기웅동생이고, 그 다음으로 많은 사람은 문유성이다.",
+        },
+        {
+          id: 3,
+          question: "채팅방에서 메시지가 가장 많이 올라온 시간대는?",
+          choices: ["오전 6~12시", "오후 12~6시", "오후 6~12시", "새벽 12~6시"],
+          answer: "오후 12~6시",
+          evidence:
+            "시간대별 메시지 수: 오전 6~12시 3,080개, 오후 12~6시 6,240개, 오후 6~12시 4,301개, 새벽 12~6시 449개.",
+          explanation: "전체 메시지를 보낸 시각 기준으로 나누면 오후 12시부터 6시 사이가 가장 많다.",
+        },
+        {
+          id: 4,
+          question: "채팅방에서 가장 긴 메시지를 작성한 사람은?",
+          choices: ["문유성", "괴물김기웅동생", "박종호군", "의외의 인물"],
+          answer: "괴물김기웅동생",
+          evidence:
+            '최장 메시지: 2020-12-17 11:00:37, 작성자 괴물김기웅동생, 글자 수 1,946자. 메시지 시작: "♦️당분간 집에만 계세요. 저는 의사입니다."',
+          explanation: "메시지 길이를 기준으로 정렬했을 때 코로나 관련 장문 전달 메시지가 가장 길었다.",
+        },
+        {
+          id: 5,
+          question: "다음 중 채팅방에서 가장 많이 나온 표현은?",
+          choices: ["ㅋㅋㅋ", "ㄹㅇ", "ㅇㅇ", "개"],
+          answer: "ㅋㅋㅋ",
+          evidence: "표현별 등장 횟수: ㅋㅋㅋ 1,986회, 개 207회, ㅇㅇ 72회, ㄹㅇ 3회.",
+          explanation: "보기 중에서는 웃음 표현인 ㅋㅋㅋ가 압도적으로 많이 등장한다.",
+        },
+        {
+          id: 6,
+          question: "채팅방에서 가장 긴 침묵 기간은 대략 얼마일까?",
+          choices: ["1개월 이상", "3개월 이상", "6개월 이상", "1년 이상"],
+          answer: "1개월 이상",
+          evidence:
+            "최장 공백: 2022-09-13 16:23:34 이후 2022-10-18 22:22:45까지 약 35일 5시간 59분.",
+          explanation: "가장 긴 메시지 간격은 약 35일로, 보기 중에서는 1개월 이상에 해당한다.",
+        },
+        {
+          id: 7,
+          question: "다음 중 실제로 채팅방에서 가장 많이 언급된 게임은?",
+          choices: ["롤", "메이플", "피파", "배그"],
+          answer: "롤",
+          evidence:
+            '게임명 언급 횟수: 롤 25회, 배그 1회, 메이플 0회, 피파 0회. 예시 메시지: "요즘 롤 푹 빠져있디", "어제 롤드컵 봄? SKT 발림 ㅋ"',
+          explanation: "보기 중에서는 롤이 가장 많이 언급되었다. 롤드컵, 롤토체스 등 관련 표현도 포함된다.",
+        },
+        {
+          id: 8,
+          question: "괴물김기웅동생이 채팅방에 처음 등장했을 때의 말투는?",
+          choices: ["존댓말", "차분한 인사", "욕 섞인 반말", "이모티콘만 보냄"],
+          answer: "욕 섞인 반말",
+          evidence: '첫 메시지: 2019-08-04 19:32:07, 괴물김기웅동생, "빨리도 초대하네 ㅅㅂ"',
+          explanation: "첫 등장 메시지가 반말이고 욕 표현이 섞여 있어 보기 중 '욕 섞인 반말'이 맞다.",
+        },
+        {
+          id: 9,
+          question: "10분 안에 가장 많은 후속 메시지를 끌어낸 메시지를 보낸 사람은?",
+          choices: ["문유성", "괴물김기웅동생", "박종호군", "의외의 인물"],
+          answer: "박종호군",
+          evidence:
+            '기준 메시지: 2019-08-23 16:06:20, 박종호군, "ㅋㅋㅋㅋ". 이후 10분 안에 후속 메시지 102개 발생.',
+          explanation:
+            "'반응이 많았던 메시지'를 '이후 10분 동안 올라온 메시지 수'로 정의하면 박종호군의 메시지가 가장 높은 수치를 기록했다.",
+        },
+        {
+          id: 10,
+          question: "다음 중 실제 채팅방에서 있었던 일은?",
+          choices: [
+            "새벽 4시대에도 대화가 있었다",
+            "누군가 연말까지 잠수한다고 말했다",
+            "단체로 모이자는 취지의 메시지가 있었다",
+            "위 셋 다 있었다",
+          ],
+          answer: "위 셋 다 있었다",
+          evidence:
+            '새벽 4시대 대화 예시: 2019-01-14 04:56:55, "섹스!" / 잠수 예시: 2022-09-13 16:04:02, 괴물김기웅동생, "나 연말까지 잠수" / 모임 예시: 2023-02-06 13:50:50, 박종호군, "시간되는 사람들 모여서 얼굴 보자는 취지..."',
+          explanation: "세 선택지 모두 실제 채팅 기록에서 확인된다. 그래서 정답은 '위 셋 다 있었다'이다.",
+        },
+      ];
+
+      const state = {
+        questions: [],
+        currentIndex: 0,
+        selectedAnswer: null,
+        answers: [],
+      };
+
+      const els = {
+        loadingPanel: document.querySelector("#loadingPanel"),
+        quizContent: document.querySelector("#quizContent"),
+        errorPanel: document.querySelector("#errorPanel"),
+        errorMessage: document.querySelector("#errorMessage"),
+        questionBadge: document.querySelector("#questionBadge"),
+        progressFill: document.querySelector("#progressFill"),
+        questionText: document.querySelector("#questionText"),
+        choices: document.querySelector("#choices"),
+        feedback: document.querySelector("#feedback"),
+        feedbackTitle: document.querySelector("#feedbackTitle"),
+        feedbackEvidence: document.querySelector("#feedbackEvidence"),
+        feedbackExplanation: document.querySelector("#feedbackExplanation"),
+        nextButton: document.querySelector("#nextButton"),
+        restartButton: document.querySelector("#restartButton"),
+        shuffleButton: document.querySelector("#shuffleButton"),
+        scoreValue: document.querySelector("#scoreValue"),
+        scoreTotal: document.querySelector("#scoreTotal"),
+        answeredCount: document.querySelector("#answeredCount"),
+        correctCount: document.querySelector("#correctCount"),
+        accuracyValue: document.querySelector("#accuracyValue"),
+        reviewList: document.querySelector("#reviewList"),
+      };
+
+      function normalizeQuestions(raw) {
+        if (!Array.isArray(raw)) {
+          throw new Error("문제 데이터는 배열이어야 합니다.");
+        }
+
+        return raw.map((item, index) => {
+          const question = String(item.question || "").trim();
+          const choices = Array.isArray(item.choices) ? item.choices.map(String) : [];
+          const answer = String(item.answer || "").trim();
+
+          if (!question || choices.length < 2 || !answer) {
+            throw new Error(`${index + 1}번 문제의 question, choices, answer 값을 확인해주세요.`);
+          }
+
+          if (!choices.includes(answer)) {
+            throw new Error(`${index + 1}번 문제의 answer가 choices 안에 없습니다.`);
+          }
+
+          return {
+            id: item.id ?? index + 1,
+            question,
+            choices,
+            answer,
+            evidence: String(item.evidence || ""),
+            explanation: String(item.explanation || ""),
+          };
+        });
+      }
+
+      function setMode(mode, message = "") {
+        els.loadingPanel.classList.toggle("hidden", mode !== "loading");
+        els.quizContent.classList.toggle("hidden", mode !== "quiz");
+        els.errorPanel.classList.toggle("hidden", mode !== "error");
+        els.errorMessage.textContent = message;
+      }
+
+      function startQuiz(questions) {
+        state.questions = questions;
+        state.currentIndex = 0;
+        state.selectedAnswer = null;
+        state.answers = [];
+        setMode("quiz");
+        renderQuestion();
+        renderScore();
+      }
+
+      function renderQuestion() {
+        const question = state.questions[state.currentIndex];
+        const total = state.questions.length;
+        const progress = total ? ((state.currentIndex + 1) / total) * 100 : 0;
+
+        state.selectedAnswer = null;
+        els.questionBadge.textContent = `문제 ${state.currentIndex + 1} / ${total}`;
+        els.progressFill.style.width = `${progress}%`;
+        els.questionText.textContent = question.question;
+        els.feedback.classList.remove("show");
+        els.nextButton.disabled = true;
+        els.nextButton.innerHTML =
+          state.currentIndex === total - 1
+            ? '결과 보기 <span aria-hidden="true">→</span>'
+            : '다음 <span aria-hidden="true">→</span>';
+
+        els.choices.replaceChildren(
+          ...question.choices.map((choice, index) => {
+            const button = document.createElement("button");
+            button.className = "choice-button";
+            button.type = "button";
+            button.dataset.answer = choice;
+            button.innerHTML = `
+              <span class="choice-mark">${choiceMarks[index] || index + 1}</span>
+              <span class="choice-text"></span>
+              <span class="choice-state"></span>
+            `;
+            button.querySelector(".choice-text").textContent = choice;
+            button.addEventListener("click", () => selectChoice(choice));
+            return button;
+          }),
+        );
+      }
+
+      function selectChoice(choice) {
+        if (state.selectedAnswer) return;
+
+        const question = state.questions[state.currentIndex];
+        const isCorrect = choice === question.answer;
+        state.selectedAnswer = choice;
+        state.answers[state.currentIndex] = {
+          question: question.question,
+          selected: choice,
+          answer: question.answer,
+          isCorrect,
+        };
+
+        [...els.choices.children].forEach((button) => {
+          const answer = button.dataset.answer;
+          const stateLabel = button.querySelector(".choice-state");
+          button.disabled = true;
+
+          if (answer === question.answer) {
+            button.classList.add("correct");
+            stateLabel.textContent = "정답";
+          }
+
+          if (answer === choice && !isCorrect) {
+            button.classList.add("wrong");
+            stateLabel.textContent = "선택";
+          }
+        });
+
+        els.feedbackTitle.textContent = isCorrect ? "맞았습니다" : `정답은 '${question.answer}'입니다`;
+        els.feedbackEvidence.textContent = question.evidence || "근거 정보가 없습니다.";
+        els.feedbackExplanation.textContent = question.explanation || "";
+        els.feedback.classList.add("show");
+        els.nextButton.disabled = false;
+        renderScore();
+      }
+
+      function renderScore() {
+        const total = state.questions.length;
+        const answered = state.answers.filter(Boolean).length;
+        const correct = state.answers.filter((answer) => answer?.isCorrect).length;
+        const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+
+        els.scoreValue.textContent = correct;
+        els.scoreTotal.textContent = `/ ${total}`;
+        els.answeredCount.textContent = answered;
+        els.correctCount.textContent = correct;
+        els.accuracyValue.textContent = `${accuracy}%`;
+
+        els.reviewList.replaceChildren(
+          ...state.answers.filter(Boolean).map((answer, index) => {
+            const item = document.createElement("article");
+            item.className = `review-item ${answer.isCorrect ? "ok" : "no"}`;
+            item.innerHTML = `
+              <span class="review-dot">${answer.isCorrect ? "O" : "X"}</span>
+              <div>
+                <p></p>
+                <small></small>
+              </div>
+            `;
+            item.querySelector("p").textContent = `${index + 1}. ${answer.question}`;
+            item.querySelector("small").textContent = answer.isCorrect
+              ? `선택: ${answer.selected}`
+              : `선택: ${answer.selected} / 정답: ${answer.answer}`;
+            return item;
+          }),
+        );
+      }
+
+      function showResult() {
+        const total = state.questions.length;
+        const correct = state.answers.filter((answer) => answer?.isCorrect).length;
+        const percent = total ? Math.round((correct / total) * 100) : 0;
+
+        els.questionBadge.textContent = "퀴즈 완료";
+        els.progressFill.style.width = "100%";
+        els.questionText.textContent = `${correct}점 / ${total}점`;
+        els.choices.replaceChildren();
+        els.feedbackTitle.textContent = `정답률 ${percent}%`;
+        els.feedbackEvidence.textContent =
+          percent >= 80
+            ? "대화방 통계를 거의 꿰고 있습니다."
+            : percent >= 50
+              ? "절반 이상 맞혔습니다. 리뷰에서 놓친 문제를 확인해보세요."
+              : "리뷰를 보면서 근거와 해설을 다시 확인해보세요.";
+        els.feedbackExplanation.textContent = "다시 풀기를 누르면 처음부터 새로 시작합니다.";
+        els.feedback.classList.add("show");
+        els.nextButton.disabled = true;
+        renderScore();
+      }
+
+      function goNext() {
+        if (!state.selectedAnswer) return;
+
+        if (state.currentIndex >= state.questions.length - 1) {
+          showResult();
+          return;
+        }
+
+        state.currentIndex += 1;
+        renderQuestion();
+      }
+
+      function shuffleQuestions() {
+        const shuffled = [...state.questions]
+          .map((question) => ({ question, order: Math.random() }))
+          .sort((a, b) => a.order - b.order)
+          .map(({ question }) => question);
+        startQuiz(shuffled);
+      }
+
+      function initializeQuiz() {
+        setMode("loading");
+        try {
+          startQuiz(normalizeQuestions(quizData));
+        } catch (error) {
+          setMode("error", error.message);
+        }
+      }
+
+      els.nextButton.addEventListener("click", goNext);
+      els.restartButton.addEventListener("click", () => startQuiz([...state.questions]));
+      els.shuffleButton.addEventListener("click", shuffleQuestions);
+
+      initializeQuiz();
+    </script>
+  </body>
+</html>
